@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#10131F">
+<title>Zero Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800;900&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<style>
+:root{--bg:#10131F;--fg:#F3F4F8;--mut:#A9B0C8;--pn:#1B2036;--ln:rgba(255,255,255,.1);--ac:#F5B800;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{height:100%;background:var(--bg)}*{box-sizing:border-box}
+body{margin:0;min-height:100%;background:radial-gradient(120% 60% at 50% 0%,#262E57 0%,transparent 100%);color:var(--fg);font-family:'Cairo',system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;font-weight:500}
+#g{max-width:560px;margin:auto;padding:12px}
+button{font:inherit;border:0;border-radius:12px;padding:12px 18px;min-height:46px;background:#2A3152;color:#fff;font-weight:800;margin:4px;cursor:pointer}
+button:active{transform:translateY(1px)}
+button:disabled{opacity:.4;cursor:default}
+button.g{background:var(--ac);color:#231B00}
+button.r{background:transparent;box-shadow:inset 0 0 0 2px #5A6390}
+button:focus-visible,input:focus-visible{outline:3px solid #fff;outline-offset:2px}
+input{font:inherit;padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.22);background:#0E1120;color:var(--fg);text-align:center;width:100%;margin:4px 0}
+input::placeholder{color:#7F88A8}
+.s{text-align:center}
+.mut{color:var(--mut)}
+/* الشعار */
+.lg{--z:84px;position:relative;width:var(--z);height:var(--z);margin:20px auto 26px;flex:none}
+.lg .q{position:absolute;inset:0;transform:rotate(45deg);border-radius:26%;overflow:hidden;display:grid;grid-template-columns:1fr 1fr}
+.lg .q i:nth-child(1){background:#D7263D}.lg .q i:nth-child(2){background:#F5B800}.lg .q i:nth-child(3){background:#1F5FD0}.lg .q i:nth-child(4){background:#17803F}
+.lg b{position:absolute;inset:22%;border-radius:50%;background:#10131F;display:flex;align-items:center;justify-content:center;font-size:calc(var(--z)*.4);font-weight:900;color:#fff;line-height:1}
+.lg.sm{--z:26px;margin:3px 6px}
+.nm{font-size:44px;font-weight:900;letter-spacing:.08em;direction:ltr;margin:0;line-height:1.1}.nm span{color:var(--ac)}
+.tg{color:var(--mut);margin:8px 0 6px;font-size:17px}
+.pnl{background:var(--pn);border:1px solid var(--ln);border-radius:18px;padding:14px;margin:12px 0}
+.prow{display:flex;align-items:center;gap:6px}.prow input{flex:1;margin:4px 0}
+.prow .pl{flex:1;justify-content:center;padding:12px;margin:4px 0}
+button.xr{background:#D7263D;padding:0;width:46px;flex:none}
+.top{display:flex;align-items:center;justify-content:space-between;margin:0 2px 10px}
+.brand{display:flex;align-items:center;font-weight:900;letter-spacing:.08em;font-size:17px;direction:ltr}
+.code{font-size:48px;letter-spacing:10px;padding:2px 10px 2px 20px;font-weight:900;direction:ltr;display:inline-block;background:#FFFDF8;color:#1C2030;border-radius:16px;margin:8px 0 14px}
+/* اللعب */
+.bar{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.pl{background:var(--pn);border:1px solid var(--ln);padding:5px 12px;border-radius:20px;font-size:14px;font-weight:700;margin:3px;display:inline-flex;gap:8px;align-items:center}
+.pl em{font-style:normal;background:#0E1120;border-radius:10px;padding:0 8px;min-width:26px;text-align:center}
+.pl.on{background:var(--ac);color:#231B00;border-color:var(--ac)}.pl.on em{background:rgba(0,0,0,.16);color:#231B00}
+.sh{font-size:11px;background:#1F5FD0;color:#fff;border-radius:8px;padding:0 6px}
+.mid{display:flex;align-items:center;justify-content:center;gap:18px;margin:16px 0 12px}
+.pile{text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px}.pile small{color:var(--mut);font-size:12px}
+.mid .c{font-size:14px}
+.cur{padding:8px 16px;border-radius:12px;font-weight:800;border:2px solid #FFFDF8}
+.log{background:rgba(0,0,0,.3);border:1px solid var(--ln);border-radius:12px;padding:8px 12px;font-size:13px;height:104px;overflow-y:auto;margin-bottom:8px;color:#D6DAEA}
+.st{text-align:center;font-weight:900;margin:8px;font-size:18px}.st.me{color:var(--ac)}.warn{color:#FF8A95;font-size:15px}
+.hand{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:22px 0 10px;max-height:42vh;overflow-y:auto}
+.act{text-align:center}.act small{color:var(--mut)}
+/* الكروت */
+.c{position:relative;width:7em;height:10.5em;font-size:12px;flex:none;border-radius:.75em;background:#FFFDF8;box-shadow:0 .5em 1em rgba(0,0,0,.4);cursor:pointer;transition:transform .15s;user-select:none}
+.c[data-i="-1"],.c[data-i="-2"]{cursor:default}
+.c .in{position:absolute;inset:.25em;border-radius:.55em;overflow:hidden;background:var(--bg);color:var(--ink)}
+.c .in:before{content:"";position:absolute;inset:.3em;border-radius:.4em;border:1px solid var(--ln)}
+.c .o2{position:absolute;left:50%;top:50%;width:5.8em;height:5.8em;margin:-2.9em 0 0 -2.9em;transform:rotate(45deg);border-radius:1.3em;border:1px solid var(--ln)}
+.c .dm{position:absolute;left:50%;top:50%;width:3.6em;height:3.6em;margin:-1.8em 0 0 -1.8em;transform:rotate(45deg);border-radius:.85em;background:var(--pn)}
+.c .sy{position:absolute;left:0;right:0;top:50%;height:3.4em;margin-top:-1.7em;display:flex;align-items:center;justify-content:center;color:var(--sc)}
+.c .tx{font-size:2.4em;font-weight:900;line-height:1;direction:ltr;unicode-bidi:isolate;text-shadow:0 .08em 0 rgba(0,0,0,.16)}.c .tx.t2{font-size:1.8em}
+.ic{width:2.3em;height:2.3em;fill:none;stroke:currentColor;stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}.ic.f{stroke:none}
+.c .k1,.c .k2{position:absolute;font-size:.8em;font-weight:800;line-height:1;direction:ltr;display:flex;align-items:center}
+.c .k1{top:.55em;left:.7em}.c .k2{bottom:.55em;right:.7em;transform:rotate(180deg)}
+.c .k1 .ic,.c .k2 .ic{width:1.15em;height:1.15em;stroke-width:4.4}
+.c .lb{position:absolute;left:0;right:0;bottom:1.9em;text-align:center;font-size:.8em;font-weight:800;line-height:1.2}
+.c .bar{position:absolute;left:0;right:0;bottom:0;height:.3em;display:flex}
+.c .bar i{flex:1}.c .bar i:nth-child(1){background:#D7263D}.c .bar i:nth-child(2){background:#F5B800}.c .bar i:nth-child(3){background:#17803F}.c .bar i:nth-child(4){background:#1F5FD0}
+.c .qd{position:absolute;left:50%;top:50%;width:3.6em;height:3.6em;margin:-1.8em 0 0 -1.8em;transform:rotate(45deg);border-radius:.85em;overflow:hidden;display:grid;grid-template-columns:1fr 1fr}
+.c .qd i:nth-child(1){background:#D7263D}.c .qd i:nth-child(2){background:#F5B800}.c .qd i:nth-child(3){background:#1F5FD0}.c .qd i:nth-child(4){background:#17803F}
+.c.up{transform:translateY(-.9em);box-shadow:0 0 0 3px var(--ac),0 .5em 1em rgba(0,0,0,.4)}
+.c.d{opacity:.45}
+/* النوافذ: اللوحة فوق عشان تفضل شايف كروتك، والشاشة الكاملة للتسليم والقواعد */
+#m{position:fixed;inset:0;display:flex;align-items:flex-start;justify-content:center;z-index:9;padding:max(8px,env(safe-area-inset-top)) 8px 8px;pointer-events:none}
+#m.o{background:var(--bg);align-items:center;pointer-events:auto}
+#m[hidden]{display:none}
+.b{background:var(--pn);color:var(--fg);border-radius:20px;padding:12px 14px;text-align:center;max-width:380px;width:100%;max-height:45vh;overflow:auto;pointer-events:auto;box-shadow:0 6px 28px rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.2)}
+.b h3{margin:4px 0;font-size:19px}.b p{margin:4px 0;color:var(--mut)}.b p:empty{display:none}.b button{min-width:64px}
+/* القواعد */
+.b.rl{max-height:90vh;max-width:460px;text-align:right;padding:18px}
+.rl h2{margin:0 0 4px;font-size:22px}.rl .sub{color:var(--mut);margin:0 0 6px}
+.rl h4{margin:20px 0 2px;font-size:17px;color:var(--ac)}
+.stp{display:flex;gap:10px;align-items:flex-start;margin:10px 0;line-height:1.6}
+.stp .n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--ac);color:#231B00;display:flex;align-items:center;justify-content:center;font-weight:900}
+.rw{display:flex;gap:14px;align-items:center;padding:10px 0;border-top:1px solid var(--ln)}
+.rw .c{font-size:6.5px}.rw .c .lb,.rw .c .k1,.rw .c .k2{display:none}
+.rw b{font-size:16px}.rl .rw p{margin:2px 0 0;color:#CBD1E6;font-size:14px;line-height:1.6}
+.rl .t{color:#CBD1E6;line-height:1.7;margin:2px 0}
+.chs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;text-align:center;padding:10px 0}
+.chs div{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:13px;font-weight:700}.chs .c{font-size:7px}.chs .c .lb,.chs .c .k1,.chs .c .k2{display:none}
+.tip{background:rgba(245,184,0,.12);border:1px solid rgba(245,184,0,.4);border-radius:12px;padding:10px 12px;margin:10px 0;line-height:1.7;font-size:14px}
+.rl .tip b{color:var(--ac)}
+</style></head><body><div id="g"></div><div id="m" hidden></div>
+<script>
+const PAL=[{bg:'#D7263D',ink:'#FFFFFF',pn:'rgba(0,0,0,.2)',ln:'rgba(255,255,255,.38)'},{bg:'#F5B800',ink:'#231B00',pn:'rgba(255,255,255,.42)',ln:'rgba(35,27,0,.3)'},{bg:'#17803F',ink:'#FFFFFF',pn:'rgba(0,0,0,.2)',ln:'rgba(255,255,255,.38)'},{bg:'#1F5FD0',ink:'#FFFFFF',pn:'rgba(0,0,0,.2)',ln:'rgba(255,255,255,.38)'}],COL=PAL.map(p=>p.bg),CN=['أحمر','أصفر','أخضر','أزرق'];
+const DK={bg:'#1C2030',ink:'#FFFFFF',pn:'#2C3350',ln:'rgba(255,255,255,.22)'},CHP={2:{bg:'#17803F',ink:'#FFFFFF'},3:{bg:'#F5B800',ink:'#231B00'},4:{bg:'#D7263D',ink:'#FFFFFF'},6:{bg:'#6D3FD0',ink:'#FFFFFF'}};
+const LV={2:'سهل',3:'متوسط',4:'صعب',6:'مستحيل'};
+const CT={2:['قول 5 حاجات حمرا في 10 ثواني','قلّد صوت حيوان','قول 5 أدوات هندسية في 30 ثانية','عدّ من 10 لـ 1 بالعكس'],3:['قول أسماء 7 دول في 10 ثواني','فضل واقف لحد ما الدور يرجعلك','قول 10 ألوان في 15 ثانية','سقف التسقيفة السوباعية وإنت واقف في نص المكان'],4:['غنّي مقطع من أغنية قدام الكل','روح اطلب من حد غريب يصورك','قف على رجل واحدة لحد ما الدور يرجعلك','اسأل واحد غريب: نوع تليفونك إيه؟'],6:['قف على رجل واحدة لحد ما الجيم يخلص',()=>`عدّ من 100 لورا بالطرح ${rand([3,4,6,7,8,9,11,12,13])} من غير غلطة`,'وقّف واحدة غريبة وقولها: ممكن نتصور سيلفي علشان صاحبتي سابتني وعايز أأكدها','وقّف واحد في الشارع وقوله: أنا معجب بيك ونفسي أتعرف عليك']};
+const chText=v=>{const u=CU[v]||(CU[v]=[]);let a=CT[v].map((x,i)=>i).filter(i=>!u.includes(i));if(!a.length){u.length=0;a=CT[v].map((x,i)=>i)}const i=rand(a);u.push(i);const x=CT[v][i];return typeof x=='function'?x():x};
+const CB=['n','skip','rev','p2','m2','sa','w4','m4'];
+let CH=1,ON=0,CL=null,PR=null,RC='',MD={},MP={},my=0,SC={},RN=1,TG=150,CU={},G=null,P=[],me=0,sel=[],mode='play',need=0,busy=false,botVer=-1,winShown=false,opq=false,PL=[{n:'',bot:false},{n:'',bot:false}];
+const $=s=>document.querySelector(s),rand=a=>a[Math.random()*a.length|0],cl=s=>String(s).replace(/[<>&"']/g,'');
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const tp=()=>G.disc[G.disc.length-1],key=c=>c.k=='n'?'n'+c.v:c.k+(c.k=='ch'?c.v:'');
+const log=s=>{G.L.push(s)};
+const hum=()=>P.filter(q=>!q.bot).length;
+function push(){MD={};MP={};$('#m').hidden=true;G.ver=(G.ver||0)+1;sel=[];mode='play';busy=false;opq=false;me=G.idx;render();checks()}
+function deck(){const d=[],add=(c,k,v,n=1)=>{for(let i=0;i<n;i++)d.push({c,k,v})};
+for(let c=0;c<4;c++){add(c,'n',0,2);for(let v=1;v<10;v++)add(c,'n',v,4);['skip','rev','p2'].forEach(k=>add(c,k,0,4));add(c,'m2',0,2);add(c,'sa',0,2)}
+add(-1,'w',0,8);add(-1,'w4',0,8);add(-1,'m4',0,4);if(CH)[2,3,4,6].forEach(v=>add(-1,'ch',v,2));add(-1,'th',0,6);add(-1,'cat',0,6);add(-1,'z',0,2);add(-1,'dn',0,4);add(-1,'dc',0,4);return shuffle(d)}
+function ask(t,o,s='',d=G&&G.idx){if(G&&d>=0&&P[d]&&P[d].bot)return o[String(o[0][0]).includes('✅')?0:Math.random()*o.length|0][1]();
+const H=`<div class=b><h3>${t}</h3><p>${s}</p>${o.map((x,i)=>`<button data-i=${i}${x[2]?` style="background:${x[2]};color:${x[3]||'#fff'}"`:''}>${x[0]}</button>`).join('')}</div>`;
+if(ON&&!CL&&G){if(d>=0&&cn(d)){MP[d]=o;MD[d]=H;return bcast()}
+if(d<0){P.forEach((q,k)=>{if(cn(k))MD[k]=`<div class=b><h3>${t}</h3><p>${s}</p><p>مستني المضيف...</p></div>`});bcast()}}
+const m=$('#m');m.className=opq?'o':'';m.innerHTML=H;m.hidden=false;m.querySelectorAll('button').forEach(b=>b.onclick=()=>{m.hidden=true;o[b.dataset.i][1]()})}
+const err=s=>ask('⚠️',[['تمام',render]],s);
+function pickP(t,cb,ex=G.idx,d=G.idx){if(d>=0&&P[d]&&P[d].bot){const c=P.map((q,i)=>i).filter(i=>i!=ex);return cb(c.reduce((a,b)=>P[b].h.length<P[a].h.length?b:a))}ask(t,P.map((q,i)=>[`${q.n} (${q.h.length})`,()=>cb(i)]).filter((o,i)=>i!=ex),'',d)}
+function pickCol(cb){const b=P[G.idx];if(b.bot){const n=[0,1,2,3].map(c=>b.h.filter(x=>x.c==c).length);G.col=n.indexOf(Math.max(...n));return cb()}ask('اختار اللون',COL.map((c,i)=>[CN[i],()=>{G.col=i;cb()},c,PAL[i].ink]))}
+function handoff(i,cb){if(ON||P[i].bot||hum()<2||i==G.idx)return cb();opq=true;ask('📱 ادّي الموبايل لـ '+P[i].n,[['أنا '+P[i].n+' — جاهز',()=>{opq=true;cb()}]],'',-1)}
+function confirmExec(t,ok,no){const o=P.map((q,i)=>i).filter(i=>i!=t&&!P[i].bot);if(P[t].bot||!o.length)return ok();
+if(ON){let n=0,f=0;o.forEach(i=>ask(`⚖️ هل ${P[t].n} نفّذ فعلاً؟`,[['نفّذ ✅',()=>{if(!f&&++n==o.length){f=1;ok()}}],['منفّذش ❌',()=>{if(!f){f=1;no()}}]],'',i));return}
+const d=new Set(),m=$('#m');
+const draw=()=>{m.className='';m.innerHTML=`<div class=b><h3>⚖️ هل ${P[t].n} نفّذ الحكم فعلاً؟</h3><p>كل لاعب يضغط اسمه لو شاف إنه نفّذ</p>${o.map(i=>`<button data-i=${i} ${d.has(i)?'disabled style="background:#17803F;opacity:1"':''}>${d.has(i)?'✔ ':''}${P[i].n}</button>`).join('')}<br><button data-n=1 style="background:#D7263D">❌ منفّذش</button></div>`;m.hidden=false;
+m.querySelectorAll('button').forEach(b=>b.onclick=()=>{if(b.dataset.n){m.hidden=true;return no()}d.add(+b.dataset.i);if(d.size==o.length){m.hidden=true;return ok()}draw()})};draw()}
+function dr(p,n){let k=0;for(;k<n;k++){if(!G.deck.length){const t=G.disc.pop();G.deck=shuffle(G.disc);G.disc=[t];log('♻️ الورق اتلخبط من الأرض');if(!G.deck.length)break}p.h.push(G.deck.pop())}return k}
+function until(p,f){let k=0;while(k<8&&dr(p,1)){k++;if(f(p.h[p.h.length-1]))break}return k}
+function hit(t,src,f){let T=P[t];if(t!=src&&T.prot==1){T.prot=2;log(`🛡️ ${T.n} عكس الهجوم على ${P[src].n}`);T=P[src]}f(T)}
+function lab(c){if(c.k=='n')return c.v;if(c.k=='ch')return `تحدي ${LV[c.v]} ${c.v}`;return{skip:'سكيب',rev:'ريفيرس',p2:'+2',m2:'−2',m4:'−4',w:'وايلد',w4:'+4',sa:'سكيب أول',th:'الحرامي',cat:'القطة',z:'الثانية صفر',dn:'سحب لحد رقم',dc:'سحب لحد لون'}[c.k]}
+const stk=c=>G.pend.k=='p2'?(c.k=='p2'||c.k=='rev'||c.k=='w4'):(c.k=='w4'||((c.k=='p2'||c.k=='rev')&&c.c==G.col));
+const playable=c=>G.pend?stk(c):(c.c<0||c.c==G.col||(tp().k==c.k&&(c.k!='n'||tp().v==c.v)));
+const canAct=R=>G&&!G.cover&&!G.win&&P[me]&&!P[me].bot&&(R||!ON||me==my);
+const cn=i=>{const e=P[i]&&PL[P[i].id];return e&&e.k},back=()=>ON&&!CL?lobby():home();
+/* ---------- شكل الكروت ---------- */
+const LB={skip:'سكيب',rev:'ريفيرس',p2:'اسحب 2',m2:'ماينص 2',m4:'ماينص 4',w:'وايلد',w4:'وايلد +4',sa:'سكيب أول',th:'الحرامي',cat:'القطة',z:'الثانية صفر',dn:'سحب لرقم',dc:'سحب للون'};
+const TX={p2:'+2',m2:'−2',m4:'−4',w4:'+4',dn:'#'};
+const IC={skip:'<circle cx="24" cy="24" r="16"/><path d="M12.7 35.3L35.3 12.7"/>',rev:'<path d="M10 17h24"/><path d="M28 10l7 7-7 7"/><path d="M38 31H14"/><path d="M20 24l-7 7 7 7"/>',sa:'<path d="M39 24a15 15 0 1 1-4.4-10.6"/><path d="M39 7v8h-8"/>',th:'<path d="M6 20q18-8 36 0v6c0 6-5 10-10 8l-8-5-8 5c-5 2-10-2-10-8z"/><circle cx="16" cy="25" r="2.6"/><circle cx="32" cy="25" r="2.6"/>',cat:'<path d="M11 38V13l8 7h10l8-7v25c0 1-1 2-2 2H13c-1 0-2-1-2-2z"/><circle cx="19" cy="29" r="1.8" fill="currentColor"/><circle cx="29" cy="29" r="1.8" fill="currentColor"/><path d="M22 34l2 2 2-2"/>',z:'<circle cx="24" cy="28" r="14"/><path d="M24 28v-8M19 8h10M24 8v6"/>',dc:'<path d="M24 7c8 9.5 12 15.5 12 21a12 12 0 0 1-24 0c0-5.5 4-11.5 12-21z"/>'};
+const ico=k=>k=='w'?'<svg class="ic f" viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="7" width="16" height="16" rx="4.5" fill="#D7263D"/><rect x="25" y="7" width="16" height="16" rx="4.5" fill="#F5B800"/><rect x="7" y="25" width="16" height="16" rx="4.5" fill="#1F5FD0"/><rect x="25" y="25" width="16" height="16" rx="4.5" fill="#17803F"/></svg>':`<svg class="ic" viewBox="0 0 48 48" aria-hidden="true">${IC[k]}</svg>`;
+const tx=c=>c.k=='n'||c.k=='ch'?c.v:TX[c.k];
+function cardHTML(c,i){const d=c.k=='ch'?CHP[c.v]:null,p=c.c>=0?PAL[c.c]:DK,t=tx(c),ic=t===undefined,
+sy=ic?ico(c.k):`<b class="tx${String(t).length>1?' t2':''}">${t}</b>`,co=ic?ico(c.k):t,
+lb=c.k=='n'?'':c.k=='ch'?'تحدي '+LV[c.v]:LB[c.k];
+return `<div class="c${sel.includes(i)?' up':''}${i>=0&&mode=='play'&&!playable(c)?' d':''}" data-i=${i} style="--bg:${p.bg};--ink:${p.ink};--pn:${d?d.bg:p.pn};--ln:${p.ln};--sc:${d?d.ink:p.ink}"><div class=in><i class=o2></i><i class=dm></i><div class=sy>${sy}</div><div class=k1>${co}</div><div class=k2>${co}</div>${lb?`<div class=lb>${lb}</div>`:''}${c.c<0?'<div class=bar><i></i><i></i><i></i><i></i></div>':''}</div></div>`}
+const backHTML=()=>`<div class="c" data-i=-1 style="--bg:#1C2030;--ink:#fff;--ln:rgba(255,255,255,.22)"><div class=in><i class=o2></i><div class=qd><i></i><i></i><i></i><i></i></div><div class=sy style="--sc:#fff"><svg class="ic" viewBox="0 0 48 48" aria-hidden="true" style="stroke-width:7"><path d="M24 10v28M10 24h28"/></svg></div></div></div>`;
+const logo=z=>`<div class="lg${z?' sm':''}"><div class=q><i></i><i></i><i></i><i></i></div><b>0</b></div>`;
+const hd=r=>`<div class=top><div class=brand>${logo(1)}ZERO CARD</div><span><button class=r data-a=rules>القواعد</button>${r?'':'<button class=r data-a=end>إنهاء</button>'}</span></div>`;
+/* ---------- القواعد ---------- */
+function showRules(){const m=$('#m');if(!m.hidden)return;
+const k=(c,k,v=0)=>({c,k,v}),row=(c,n,t)=>`<div class=rw>${cardHTML(c,-2)}<div><b>${n}</b><p>${t}</p></div></div>`,stp=(n,t)=>`<div class=stp><span class=n>${n}</span><div>${t}</div></div>`;
+m.className='o';m.innerHTML=`<div class="b rl"><h2>إزاي تلعب Zero Card؟</h2><p class=sub>اللي إيده تفضى الأول هو اللي بيكسب.</p>
+<h4>الدور بتاعك</h4>
+${stp(1,'كل لاعب بياخد 7 كروت. من 2 لـ 8 لاعبين.')}
+${stp(2,'اضغط على كارت بنفس <b>اللون</b> أو <b>الرقم</b> أو <b>النوع</b> اللي على الأرض، وبعدين اضغط <b>العب</b>. الكروت <b>السودا</b> بتتنزل في أي وقت.')}
+${stp(3,'معاك كارت ينفع؟ لازم تلعبه ومينفعش تسحب. معاكش؟ اضغط <b>اسحب</b> وهتسحب لحد ما يجيلك كارت ينفع.')}
+<h4>الكروت العادية</h4>
+${row(k(0,'n',7),'الأرقام من 0 لـ 9','كروت عادية، ملهاش تأثير.')}
+${row(k(2,'skip'),'سكيب','اللي بعدك بيتخطى دوره.')}
+${row(k(1,'rev'),'ريفيرس','بيعكس اتجاه اللعب. مع لاعبين اتنين بيشتغل زي السكيب.')}
+${row(k(3,'p2'),'+2','اللي بعدك بيسحب كارتين (والتراكم تحت).')}
+<h4>الكروت السودا</h4>
+${row(k(-1,'w'),'وايلد','بتختار اللون اللي هيكمل بيه اللعب.')}
+${row(k(-1,'w4'),'وايلد +4','بتختار لون، واللي بعدك بيسحب 4 (والتراكم تحت).')}
+${row(k(-1,'m4'),'ماينص 4','بتختار لون، وإنت اللي بتتخلص من 4 كروت من إيدك.')}
+<h4>الكروت الجديدة</h4>
+${row(k(0,'m2'),'ماينص 2','عكس +2: إنت اللي بتختار كارتين من إيدك وتتخلص منهم.')}
+${row(k(2,'sa'),'سكيب أول','كل اللاعبين بيتخطوا وإنت بتلعب تاني.')}
+${row(k(-1,'th'),'الحرامي','بتبدّل كل ورقك مع لاعب بتختاره.')}
+${row(k(-1,'cat'),'القطة','ورق كل اللاعبين بيتلخبط وبيتوزع تاني، كل واحد بنفس عدد كروته. وبعدها بتلعب تاني.')}
+${row(k(-1,'z'),'الثانية صفر','اللعبة بتخلص فوراً، واللي معاه أقل عدد كروت يكسب. مينفعش تكسب بيها لو هي آخر كارت معاك.')}
+${row(k(-1,'dc'),'سحب لحد لون','بتختار لاعب ولون، وهو بيسحب لحد ما يطلعله اللون ده (أقصى 8 كروت) وبيتخطى دوره.')}
+${row(k(-1,'dn'),'سحب لحد رقم','نفس الفكرة، بس بتختار رقم من 0 لـ 9.')}
+<h4>كروت التحدي</h4>
+<p class=t>(لو اللعبة اتبدأت من غير كروت التحدي، تجاهل الجزء ده.)</p>
+<p class=t>بتلعب الكارت وتختار مين تتحداه: أي لاعب تاني أو نفسك. بيطلعله حكم عشوائي. لو <b>نفّذه</b> لازم باقي اللاعبين يأكدوا إنه نفّذ (كل واحد يضغط اسمه)، وبعدها يختار مين ياخد الكروت. لو <b>رفض</b> أو حد قال إنه منفّذش، هو اللي بيسحب. العدد على الكارت هو عدد الكروت.</p>
+<div class=chs>${[2,3,4,6].map(v=>`<div>${cardHTML(k(-1,'ch',v),-2)}${LV[v]}</div>`).join('')}</div>
+<h4>التحديات اللي ممكن تطلعلك</h4><div class=tip>${[2,3,4,6].map(v=>`<b>${LV[v]} (${v} كروت):</b><br>`+CT[v].map(x=>'• '+(typeof x=='function'?'عدّ من 100 لورا بالطرح (رقم بيتحدد عشوائي) من غير غلطة':x)).join('<br>')).join('<br><br>')}<br><br><b>تنبيه:</b> لو الشخص الغريب مش مرتاح، اعتذر وامشي، وده بيتحسب رفض.</div>
+<h4>تراكم السحب</h4>
+<div class=tip><b>لو اتلعب عليك +2:</b> رد بـ +2 (أي لون) أو +4 أو ريفيرس، والعدد بيتجمع.<br><b>لو اتلعب عليك +4:</b> رد بـ +4، أو +2 أو ريفيرس بنفس اللون اللي اتختار.<br><b>الريفيرس</b> بيرمي السحب كله على اللاعب اللي قبلك.<br>لو مقدرتش ترد، بتسحب المجموع كله وبتضيع دورك.</div>
+<h4>قدرات تانية</h4>
+<div class=tip><b>الكومبو:</b> مرة واحدة بس لكل لاعب تنزل 2 أو 3 كروت زي بعض مع بعض، وتأثيرهم بيتضاعف (الأرقام، سكيب، ريفيرس، +2، −2، سكيب أول، +4، −4). اختارهم كلهم الأول وبعدين اضغط العب.</div>
+<div class=tip><b>الحماية:</b> بتفعّلها مرة واحدة في دورك وبتفضل 3 لفات. أول هجوم عليك (+2 أو +4 أو سحب لحد لون أو رقم أو تحدي) بيرجع لصاحبه. محدش من الباقيين بيشوف إنها شغالة.</div>
+<h4>النقاط والجولات</h4><div class=tip><b>اللعبة على جولات.</b> قبل البداية بتختار الهدف: 150 أو 300 نقطة، وأول لاعب يوصله يكسب اللعبة.<br><b>نقط الجولة:</b> اللي يخلّص كروته الأول ياخد مجموع نقط الكروت اللي فاضلة مع باقي اللاعبين.<br><b>حساب النقط:</b> الكارت الرقم نقطه برقمه (من 0 لـ 9)، وأي كارت مميز (سكيب، ريفيرس، +2، −2، الكروت السودا، التحدي، وغيرهم) بـ 10 نقط.<br><b>الثانية صفر:</b> اللي معاه أقل عدد كروت ياخد نقط الجولة. لو اتساووا في العدد، اللي مجموع نقط كروته أقل هو اللي ياخد. ولو اتساووا في المجموع كمان، نقط الباقين بتتوزع عليهم بالتساوي.<br><b>الاستسلام:</b> أي لاعب يقدر يستسلم في دوره، وبوت بيكمل مكانه بنفس كروته ونقطه.</div>
+<div style="text-align:center;position:sticky;bottom:-18px;padding:10px 0 4px;background:var(--pn)"><button class="g cl" style="width:100%">فهمت</button></div></div>`;m.hidden=false;m.querySelector('.cl').onclick=()=>{m.hidden=true}}
+/* ---------- الشاشات ---------- */
+function home(){if(ON&&!CL&&PR){G=null;P=[];MD={};MP={};PL.forEach(x=>{if(x.s){x.bot=false;delete x.s}});PL=PL.filter(x=>!x.k||x.k.open);return lobby()}G=null;P=[];PL.forEach(x=>{if(x.s){x.bot=false;delete x.s}});
+$('#g').innerHTML=`<div class=s>${logo()}<h1 class=nm>ZERO <span>CARD</span></h1><p class=tg>فضّي إيدك.. واكسب الجولة</p><p class=mut style="margin:0 0 10px;font-size:14px">لعب على موبايل واحد: كل لاعب بيمرر الموبايل للي بعده</p><div class=pnl>${PL.map((x,i)=>`<div class=prow>${x.bot?`<span class=pl>🤖 بوت</span>`:`<input class=pn data-i=${i} placeholder="لاعب ${i+1}" maxlength=12 value="${cl(x.n)}" aria-label="اسم اللاعب ${i+1}">`}${PL.length>2?`<button class=xr data-a=rm data-i=${i} aria-label="شيل اللاعب">✕</button>`:''}</div>`).join('')}<p class=mut style="margin:8px 0 2px">${PL.length} لاعبين (من 2 لـ 8)</p><button data-a=addh ${PL.length>=8?'disabled':''}>+ لاعب</button><button data-a=addb ${PL.length>=8?'disabled':''}>+ بوت</button></div><div class=pnl><p class=mut style="margin:0 0 4px">اللعبة على جولات، الهدف:</p><button data-a=tg data-v=150 class=${TG==150?'g':'r'}>150 نقطة</button><button data-a=tg data-v=300 class=${TG==300?'g':'r'}>300 نقطة</button><p class=mut style="margin:10px 0 4px">كروت التحدي:</p><button data-a=ch data-v=1 class=${CH?'g':'r'}>موجودة</button><button data-a=ch data-v=0 class=${CH?'r':'g'}>من غيرها</button></div><button class=g data-a=start style="font-size:18px;padding:13px 30px">ابدأ اللعب</button><br><button data-a=online style="background:#1F5FD0;padding:12px 34px">🌐 أونلاين</button><br><button class=r data-a=rules>إزاي تلعب؟</button></div>`}
+const syncPL=()=>document.querySelectorAll('.pn').forEach(e=>{if(PL[+e.dataset.i])PL[+e.dataset.i].n=e.value});
+function start(){syncPL();let b=0;
+const L0=PL.map((x,i)=>x.bot?{id:i,n:x.s?'🤖 '+x.n:'🤖 بوت '+(++b),bot:true}:{id:i,n:cl(x.n.trim())||'لاعب '+(i+1),bot:false});
+const d=deck(),f=d.splice(d.findIndex(c=>c.k=='n'),1)[0];
+G={deck:d,disc:[f],idx:0,dir:1,col:f.c,L:[],drew:false,win:null,ver:0,cover:false,pend:null,P:shuffle(L0).map(p=>({...p,h:[],prot:0,r:0,combo:false}))};
+P=G.P;my=P.findIndex(q=>q.id==0);P.forEach(p=>dr(p,7));winShown=false;botVer=-1;startTurn()}
+function checks(){if(G.win){if(!winShown){winShown=true;opq=true;const o=P.some(q=>(SC[q.id]||0)>=TG),t=[...P].sort((a,b)=>(SC[b.id]||0)-(SC[a.id]||0)),rows=t.map(q=>`${q.n}: <b>${SC[q.id]||0}</b>`).join('<br>');ask(o?'🏆 '+t[0].n+' كسب اللعبة!':'🏁 '+G.win,o?[['لعبة جديدة',home]]:[['الجولة الجاية',()=>{RN++;start()}]],`${o?G.win+'<br>':''}+${G.sh} نقطة لكل فايز<br>${rows}<br>الهدف: ${TG}`,-1)}return}
+if(P[G.idx].bot&&botVer!=G.ver){botVer=G.ver;const v=G.ver;setTimeout(()=>{if(G&&G.ver==v&&!busy&&!G.win)bot()},1300)}}
+function vh(V){const p=P[V],t=tp(),act=!!G&&!G.cover&&!G.win&&!p.bot&&V==me,sv=sel;if(!act)sel=[];const h=`${hd(ON&&V!=my)}<p class="s mut" style="margin:0 0 6px;font-size:13px">جولة ${RN} · الهدف ${TG} نقطة</p><div class=bar>${P.map((q,i)=>`<span class="pl${i==G.idx?' on':''}">${q.n}<em>${q.h.length}</em><small class=sh style="background:#17803F">${SC[q.id]||0}</small>${q.prot==1&&!q.bot&&(i==V||(!ON&&hum()==1))?'<small class=sh>حماية</small>':''}</span>`).join('')}</div>
+<div class=mid><div class=pile>${backHTML()}<small>الدك ${G.deck.length}</small></div><div class=pile>${cardHTML(t,-1)}<small>على الأرض</small></div><div class=cur style="background:${COL[G.col]};color:${PAL[G.col].ink}">${CN[G.col]}</div></div>
+<div class=log>${G.L.map(x=>`<div>${x}</div>`).join('')}</div>
+<div class="st${act?' me':''}">${act?'دورك يا '+p.n+'!':'الدور على '+P[G.idx].n}${G.pend?`<br><span class=warn>⚠️ تراكم سحب: ${G.pend.n} كروت</span>`:''}</div>
+<div class=hand>${p.bot?'<p class=mut>🤖 بيفكر...</p>':p.h.map(cardHTML).join('')}</div>
+<div class=act>${!act?'':mode=='shed'?`<p>اختار ${need} كروت تتخلص منهم (${sel.length}/${need})</p><button class=g data-a=shed>تخلّص</button>`:`<button class=g data-a=play>العب ${sel.length>1?'كومبو ×'+sel.length:''}</button><button class=r data-a=draw ${!G.pend&&!G.drew&&p.h.some(playable)?'disabled':''}>${G.pend?'اسحب '+G.pend.n:G.drew?'عدّي الدور':'اسحب لحد ما يجيلك كارت'}</button><button class=r data-a=sur>🏳️ استسلام</button>${p.prot==0&&!G.pend?'<button data-a=prot>🛡️ فعّل الحماية</button>':p.prot==1?`<br><small>🛡️ حمايتك شغالة (باقي ${p.r} لفات) ومخفية عن الباقي</small>`:''}${p.combo?'':'<br><small>الكومبو: اختار 2-3 كروت زي بعض</small>'}`}</div>`;sel=sv;return h}
+function render(){if(CL)return;const p=P[me],ol=$('.log'),up=ol&&ol.scrollTop+ol.clientHeight<ol.scrollHeight-8,pos=ol?ol.scrollTop:0;
+if(G.cover&&!G.win){$('#g').innerHTML=`<div class=s>${logo()}<p class=mut>ادّي الموبايل لـ</p><div class=code style="font-size:34px;letter-spacing:0;padding:6px 24px;direction:rtl">${p.n}</div><p class=mut>${P.map(q=>q.n+': '+q.h.length).join(' | ')}</p><button class=g data-a=ready>أنا ${p.n} — جاهز</button></div>`;return}
+$('#g').innerHTML=vh(ON?my:me);const nl=$('.log');if(nl)nl.scrollTop=up?pos:nl.scrollHeight;if(ON)bcast()}
+$('#g').onclick=e=>{const c=e.target.closest('.c'),b=e.target.closest('[data-a]');
+if(CL){if(c&&+c.dataset.i>=0)return CL.send({a:'c',i:+c.dataset.i});if(b){const a=b.dataset.a;if(a=='rules')return showRules();if(a=='quit'){leave();return home()}CL.send({a})}return}
+go(c,b)};
+function go(c,b,R){
+if(c){if(canAct(R)&&+c.dataset.i>=0){const i=+c.dataset.i,k=sel.indexOf(i);k<0?sel.push(i):sel.splice(k,1);render()}return}
+if(!b)return;const a=b.dataset.a;
+if(a=='rules')return showRules();
+if(a=='addh'||a=='addb'){syncPL();if(PL.length<8)PL.push({n:'',bot:a=='addb'});return back()}
+if(a=='rm'){syncPL();if(PL.length>(ON?1:2)){const e=PL.splice(+b.dataset.i,1)[0];if(e&&e.k)try{e.k.send({t:'err',m:'المضيف شالك من الغرفة'});e.k.close()}catch(x){}}return back()}
+if(a=='online'){syncPL();return onlineMenu()}
+if(a=='host')return hostRoom();
+if(a=='join')return joinRoom(($('#jc').value||'').trim().toUpperCase(),cl($('#jn').value.trim())||'لاعب');
+if(a=='back'||a=='quit'){leave();return home()}
+if(a=='start'){if(PL.length<2)return;syncPL();SC={};RN=1;CU={};return start()}
+if(a=='tg'){syncPL();TG=+b.dataset.v;return back()}
+if(a=='ch'){syncPL();CH=+b.dataset.v;return back()}
+if(a=='end'){if(R)return;if(confirm('إنهاء اللعبة؟ النقط هتضيع'))home();return}
+if(a=='ready'){if(G){G.cover=false;render()}return}
+if(!canAct(R))return;const p=P[me];
+if(a=='sur')return ask('تستسلم؟',[['أيوه، بوت يكمل مكاني',()=>{log(`🏳️ ${p.n} استسلم`);PL[p.id]={n:p.n,bot:true,s:1,k:PL[p.id].k};p.n='🤖 '+p.n;p.bot=true;if(!hum())return home();busy=false;push()}],['لأ',render]],'',me);
+if(a=='shed'){if(mode!='shed'||sel.length!=need)return;sel.sort((x,y)=>y-x).forEach(i=>p.h.splice(i,1));log(`${p.n} تخلص من ${need}`);return p.h.length?endTurn():win(p)}
+if(busy)return;
+if(a=='play')play();
+if(a=='draw'){if(G.pend){busy=true;const n=G.pend.n;dr(p,n);log(`${p.n} سحب ${n} (تراكم)`);G.pend=null;return endTurn()}if(G.drew){busy=true;return endTurn()}if(p.h.some(playable))return err('معاك كارت ينفع تلعبه، مينفعش تسحب');busy=true;let k=0;while(!p.h.some(playable)&&k<40&&dr(p,1))k++;log(`${p.n} سحب ${k} كروت`);if(!p.h.some(playable))return endTurn();G.drew=true;push()}
+if(a=='prot'){busy=true;p.prot=1;p.r=3;push()}};
+/* ---------- منطق اللعب ---------- */
+function startTurn(){const p=P[G.idx];if(p.prot==1&&--p.r<=0)p.prot=2;G.drew=false;G.cover=!ON&&!p.bot&&hum()>1;push()}
+function endTurn(s=0){const N=P.length;if(s)log(`⏭️ تخطي ${s}`);G.idx=(((G.idx+G.dir*(1+s))%N)+N)%N;startTurn()}
+const again=()=>{G.drew=false;push()};
+function play(){const p=P[me];if(!sel.length)return;const cs0=sel.map(i=>p.h[i]),f=cs0[0],n=cs0.length;
+if(cs0.some(c=>key(c)!=key(f)))return err('الكومبو لازم كروت زي بعض');
+if(n>1&&(p.combo||n>3||!CB.includes(f.k)))return err('الكومبو مرة واحدة، أقصاه 3 كروت من نوع قابل للكومبو');
+if(!playable(f))return err(G.pend?'لازم تلعب +2/+4 مناسب أو عكس، أو تسحب':'الكارت ده مش مناسب');
+busy=true;doPlay(p,cs0,f,n)}
+function doPlay(p,cs0,f,n){sel.sort((x,y)=>y-x).forEach(i=>p.h.splice(i,1));cs0.forEach(c=>G.disc.push(c));sel=[];if(n>1)p.combo=true;if(f.c>=0)G.col=f.c;
+log(`${p.n} لعب ${lab(f)}${n>1?' ×'+n:''}`);if(!p.h.length&&f.k!='z')return win(p);resolve(f,n)}
+function atk(kind,add,nx){const base=G.pend?G.pend.n:0,T=P[nx],q=P[G.idx];
+if(nx!=G.idx&&T.prot==1){T.prot=2;log(`🛡️ ${T.n} عكس الهجوم على ${q.n}`);dr(q,base+add);log(`${q.n} سحب ${base+add}`);G.pend=null;return endTurn(1)}
+G.pend={k:kind,n:base+add};endTurn()}
+function pen(t,k){hit(t,G.idx,q=>{dr(q,k);log(`${q.n} سحب ${k}`)});endTurn(1)}
+function shed(k){const q=P[G.idx];need=Math.min(k,q.h.length);if(!need)return endTurn();if(q.bot){for(let i=0;i<need;i++)q.h.splice(Math.random()*q.h.length|0,1);log(`${q.n} تخلص من ${need}`);return q.h.length?endTurn():win(q)}mode='shed';sel=[];render()}
+function resolve(f,n){const p=P[G.idx],N=P.length,nx=((G.idx+G.dir)%N+N)%N;
+switch(f.k){
+case'n':return endTurn();
+case'skip':return endTurn(n);
+case'rev':if(n%2)G.dir*=-1;if(G.pend){if(n%2)log('↩️ السحب اتقلب للي قبله');return endTurn()}return endTurn(N==2&&n%2?1:0);
+case'p2':return atk('p2',2*n,nx);
+case'w':return pickCol(()=>endTurn());
+case'w4':return pickCol(()=>atk('w4',4*n,nx));
+case'm2':return shed(2*n);
+case'm4':return pickCol(()=>shed(4*n));
+case'sa':log('تخطي الكل! العب تاني');return again();
+case'cat':{const all=shuffle(P.flatMap(q=>q.h));P.forEach(q=>{q.h=all.splice(0,q.h.length)});log('🐱 القطة لخبطت ورق الكل');return again()}
+case'th':return pickP('بدّل ورقك مع مين؟',t=>{[p.h,P[t].h]=[P[t].h,p.h];log(`🥷 ${p.n} بدّل مع ${P[t].n}`);endTurn()});
+case'ch':return pickP('مين تتحداه؟ (ممكن نفسك)',t=>{const v=f.v,tx=chText(v);
+handoff(t,()=>ask(`${P[t].n}: تحدي ${LV[v]}`,[['نفّذت ✅',()=>confirmExec(t,()=>pickP(`اختار مين ياخد ${v} كروت`,j=>{hit(j,t,q=>{dr(q,v);log(`${q.n} سحب ${v} (تحدي)`)});endTurn()},t,t),()=>{dr(P[t],v);log(`${P[t].n} ادّعى التنفيذ والباقي مأكدوش، سحب ${v}`);endTurn()})],['رفض ❌',()=>{dr(P[t],v);log(`${P[t].n} رفض وسحب ${v}`);endTurn()}]],tx,t))},-1);
+case'z':{const m=Math.min(...P.map(q=>q.h.length));let W=P.filter(q=>q.h.length==m);const pm=Math.min(...W.map(q=>pts(q.h)));W=W.filter(q=>pts(q.h)==pm);return win(W,1)}
+case'dn':return pickP('مين يسحب؟',t=>ask('لحد أنهي رقم؟',[...Array(10).keys()].map(v=>[v,()=>{hit(t,G.idx,q=>{const k=until(q,c=>c.k=='n'&&c.v==v);log(`${q.n} سحب ${k} لحد ما طلع ${v}`)});endTurn(1)}])));
+case'dc':return pickP('مين يسحب؟',t=>pickCol(()=>{const c=G.col;hit(t,G.idx,q=>{const k=until(q,x=>x.c==c);log(`${q.n} سحب ${k} لحد ${CN[c]}`)});endTurn(1)}))}}
+const pts=h=>h.reduce((s,c)=>s+(c.k=='n'?c.v:10),0);
+function bot(){busy=true;const p=P[G.idx],N=P.length,nx=P[((G.idx+G.dir)%N+N)%N];
+if(p.prot==0&&!G.pend&&p.h.length<=4&&Math.random()<.5){p.prot=1;p.r=3}
+const mn=Math.min(...P.filter(q=>q!=p).map(q=>q.h.length));
+const pk=()=>p.h.map((c,i)=>i).filter(i=>playable(p.h[i])&&(p.h[i].k!='z'||p.h.length-1<=mn));
+if(G.pend&&!p.h.some(playable)){const n=G.pend.n;dr(p,n);log(`${p.n} سحب ${n} (تراكم)`);G.pend=null;return endTurn()}
+let ok=pk();if(!ok.length){let k=0;while(!pk().length&&k<40&&dr(p,1))k++;log(`${p.n} سحب ${k} كروت`);ok=pk();if(!ok.length)return endTurn()}
+const sc=i=>{const c=p.h[i],k=c.k;let s=Math.random();
+if(k=='n')s+=c.v/2;else{s+=3;if(c.c<0&&p.h.length>3)s-=4;
+if(['p2','w4','dn','dc','ch'].includes(k))s+=nx.h.length<=3?7:2;
+if(k=='th')s+=p.h.length-mn>2?9:-6;if(k=='z')s+=40;if(k=='m2'||k=='m4')s+=5;if(k=='sa'||k=='skip')s+=2}return s};
+const S=Object.fromEntries(ok.map(i=>[i,sc(i)])),i=ok.reduce((a,b)=>S[b]>S[a]?b:a);sel=[i];
+const sm=p.h.map((c,j)=>j).filter(j=>j!=i&&key(p.h[j])==key(p.h[i])&&CB.includes(p.h[i].k));
+if(!p.combo&&sm.length)sel=[i,sm[0]];
+const cs0=sel.map(j=>p.h[j]);doPlay(p,cs0,cs0[0],cs0.length)}
+function win(W,z){W=[].concat(W);const pool=P.filter(q=>!W.includes(q)).reduce((a,q)=>a+pts(q.h),0),sh=pool/W.length|0;W.forEach(q=>SC[q.id]=(SC[q.id]||0)+sh);G.sh=sh;G.win=(z?'الثانية صفر! ':'')+'فاز '+W.map(q=>q.n).join(' و ');push()}
+let BQ=0;function bcast(){if(!ON||CL||!G||BQ)return;BQ=1;setTimeout(()=>{BQ=0;if(!G)return;P.forEach((q,i)=>{const c=cn(i);if(c&&c.open)c.send({t:'v',h:vh(i),m:MD[i]||null})})},40)}
+function lobbyBC(){const l=PL.map((x,i)=>(x.bot?'🤖 ':'')+(x.n||(i?'بوت':'المضيف')));PL.forEach(x=>{if(x.k&&x.k.open)x.k.send({t:'lobby',c:RC,l,tg:TG,ch:CH})})}
+function lobby(){ON=1;$('#m').hidden=true;$('#g').innerHTML=`<div class=s>${logo()}<h2>🌐 غرفة أونلاين</h2><p class=mut>ابعت الكود ده لصحابك</p><div class=code>${RC}</div><div class=pnl>${PL.map((x,i)=>`<div class=prow>${i==0?`<input class=pn data-i=0 placeholder="اسمك" maxlength=12 value="${cl(x.n)}">`:`<span class="pl" style="flex:1">${x.bot?'🤖 بوت':'📱 '+cl(x.n)}</span>`}${i?`<button class=xr data-a=rm data-i=${i}>✕</button>`:''}</div>`).join('')}<p class=mut style="margin:8px 0 2px">${PL.length} لاعبين (من 2 لـ 8)</p><button data-a=addb ${PL.length>=8?'disabled':''}>+ بوت</button></div><div class=pnl><p class=mut style="margin:0 0 4px">الهدف:</p><button data-a=tg data-v=150 class=${TG==150?'g':'r'}>150 نقطة</button><button data-a=tg data-v=300 class=${TG==300?'g':'r'}>300 نقطة</button><p class=mut style="margin:10px 0 4px">كروت التحدي:</p><button data-a=ch data-v=1 class=${CH?'g':'r'}>موجودة</button><button data-a=ch data-v=0 class=${CH?'r':'g'}>من غيرها</button></div><button class=g data-a=start ${PL.length<2?'disabled':''} style="font-size:18px;padding:13px 30px">ابدأ اللعب</button><br><button class=r data-a=quit>خروج</button></div>`;lobbyBC()}
+function onlineMenu(){if(typeof Peer=='undefined')loadPeer(()=>{});$('#g').innerHTML=`<div class=s>${logo()}<h2>🌐 لعب أونلاين</h2><div class=pnl><button class=g data-a=host style="width:100%">افتح غرفة جديدة</button></div><div class=pnl><p class=mut style="margin:0">أو ادخل غرفة صاحبك</p><input id=jn placeholder="اسمك" maxlength=12><input id=jc placeholder="كود الغرفة" maxlength=4><button class=g data-a=join style="width:100%">ادخل</button></div><button class=r data-a=back>رجوع</button></div>`}
+function leave(){try{PR&&PR.destroy()}catch(e){}PR=null;CL=null;ON=0;MD={};MP={};G=null;P=[];PL=[{n:'',bot:false},{n:'',bot:false}]}
+let LP=0;function loadPeer(cb){if(window.Peer)return cb();if(LP)return setTimeout(()=>loadPeer(cb),300);LP=1;const x=document.createElement('script');x.src='https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js';x.onload=()=>{LP=0;cb()};x.onerror=()=>{LP=0;alert('مش قادر أحمّل الأونلاين، اتأكد من النت')};document.head.appendChild(x)}
+function hostRoom(){if(typeof Peer=='undefined')return loadPeer(hostRoom);
+RC=Math.random().toString(36).slice(2,6).toUpperCase();ON=1;PR=new Peer('zerocard-'+RC);
+PR.on('open',()=>{PL=[{n:(PL[0]&&PL[0].n)||'',bot:false}];lobby()});
+PR.on('connection',c=>{c.on('data',d=>hdata(c,d));c.on('close',()=>drop(c))});
+PR.on('error',e=>{if(e.type=='unavailable-id')return hostRoom();alert('مشكلة في الاتصال');leave();home()})}
+function hdata(c,d){if(d.t=='join'){if(G||PL.length>=8)return c.send({t:'err',m:'الغرفة مقفولة أو ممتلئة'});syncPL();PL.push({n:cl(String(d.n)).slice(0,12)||'لاعب',bot:false,k:c});return lobby()}
+if(!G)return;const q=P.findIndex(z=>PL[z.id]&&PL[z.id].k===c);if(q<0)return;
+if(d.a=='m'){const o=MP[q];if(!o||!o[d.i])return;MP[q]=null;MD[q]=null;bcast();return o[d.i][1]()}
+if(!['c','play','draw','prot','shed','sur'].includes(d.a)||q!=G.idx)return;
+d.a=='c'?go({dataset:{i:d.i}},null,1):go(null,{dataset:{a:d.a}},1)}
+function drop(c){const i=PL.findIndex(x=>x.k===c);if(i<0)return;if(!G){PL.splice(i,1);return lobby()}
+PL[i].bot=true;PL[i].s=1;const q=P.find(z=>z.id==i);if(!q||q.bot)return;const t=P.indexOf(q),o=MP[t];q.bot=true;q.n='🤖 '+q.n;MP[t]=null;MD[t]=null;log(`📴 ${q.n} فصل`);
+if(o)return o[0][1]();if(t==G.idx&&!busy&&!G.win)push();else render()}
+function joinRoom(code,n){if(typeof Peer=='undefined')return loadPeer(()=>joinRoom(code,n));if(code.length<4)return alert('اكتب كود الغرفة');
+ON=1;$('#g').innerHTML='<div class=s><p class=mut>جاري الاتصال...</p></div>';PR=new Peer();
+const bad=m=>{alert(m);leave();home()};
+PR.on('open',()=>{const c=PR.connect('zerocard-'+code,{reliable:true});c.on('open',()=>{CL=c;c.send({t:'join',n})});c.on('data',cdata);c.on('close',()=>{if(CL)bad('المضيف خرج من الغرفة')})});
+PR.on('error',e=>bad(e.type=='peer-unavailable'?'الكود غلط أو الغرفة اتقفلت':'مشكلة في الاتصال'))}
+function cdata(d){const m=$('#m');
+if(d.t=='lobby'){m.hidden=true;$('#g').innerHTML=`<div class=s>${logo()}<h2>🌐 الغرفة ${d.c}</h2><div class=pnl>${d.l.map(x=>`<div class=prow><span class=pl style="flex:1">${cl(x)}</span></div>`).join('')}</div><p class=mut>الهدف: ${d.tg} نقطة · كروت التحدي: ${d.ch?'موجودة':'من غيرها'}</p><p class=mut>مستني المضيف يبدأ اللعب...</p><button class=r data-a=quit>خروج</button></div>`}
+if(d.t=='v'){$('#g').innerHTML=d.h;const l=$('.log');if(l)l.scrollTop=l.scrollHeight;if(d.m){m.className='';m.innerHTML=d.m;m.hidden=false}else m.hidden=true}
+if(d.t=='err'){alert(d.m);leave();home()}}
+$('#m').onclick=e=>{const b=e.target.closest('button[data-i]');if(CL&&b)CL.send({a:'m',i:+b.dataset.i})};
+home();
+</script></body></html>
